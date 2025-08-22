@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogicLab - Aprenda Lógica em Engenharia de Software</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.6;
+            overflow-x: hidden;
+            letter-spacing: 0.3px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2a004a 0%, #4b0082 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0.5;
+            animation: pulse 5s infinite;
+        }
+
+        header img.logo {
+            width: 150px;
+            margin-bottom: 20px;
+            animation: bounceIn 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease-in;
+        }
+
+        header p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+            animation: fadeInUp 1.5s ease-in;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #4b0082;
+            margin: 10px auto 0;
+        }
+
+        p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        #about {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            padding: 80px;
+            margin-bottom: 60px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.8s ease-out;
+        }
+
+        #about.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Mission, Vision, Values */
+        #mission-vision {
+            background: linear-gradient(135deg, #f5f5f7 0%, #e0e0e0 100%);
+            padding: 80px 20px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .value-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 2px solid #4b0082;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .value-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(75, 0, 130, 0.3);
+        }
+
+        .value-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2a004a;
+        }
+
+        /* Differentiators */
+        #differentiators {
+            background: #2a004a;
+            color: white;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #differentiators::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .diff-card {
+            background: rgba(75, 0, 130, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.4s ease, background 0.4s ease;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .diff-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .diff-card:hover {
+            transform: scale(1.05);
+            background: rgba(75, 0, 130, 0.5);
+        }
+
+        .diff-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        /* Team */
+        #team {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .team-card {
+            background: #f5f5f7;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 2px solid #2a004a;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .team-card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .team-card:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+            border: 3px solid #4b0082;
+            transition: border-color 0.3s;
+        }
+
+        .team-card:hover img {
+            border-color: #2a004a;
+        }
+
+        .team-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: #2a004a;
+        }
+
+        /* Footer */
+        footer {
+            background: #2a004a;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.1); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 3rem; }
+            h2 { font-size: 2.5rem; }
+            #about { padding: 60px 20px; }
+            .value-card, .diff-card, .team-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="LogicLab Logo" class="logo">
+        <h1>LogicLab</h1>
+        <p>Lógica em ebulição, aprendizado em explosão!</p>
+    </header>
+
+    <section id="about">
+        <h2>Sobre o LogicLab</h2>
+        <p>LogicLab é um aplicativo educacional projetado para facilitar o aprendizado de lógica no início do curso de Engenharia de Software. Com ferramentas interativas e uma abordagem prática, ajudamos estudantes a dominar os fundamentos essenciais.</p>
+    </section>
+
+    <section id="mission-vision">
+        <h2>Missão, Visão e Valores</h2>
+        <p>Nossa missão é capacitar estudantes com recursos que simplifiquem o aprendizado de lógica desde o começo.</p>
+        <div class="values-grid">
+            <div class="value-card">
+                <h3>Missão</h3>
+                <p>Oferecer suporte acessível e prático para o aprendizado de lógica em Engenharia de Software.</p>
+            </div>
+            <div class="value-card">
+                <h3>Visão</h3>
+                <p>Tornar-se a principal ferramenta para o ensino de lógica no início da graduação.</p>
+            </div>
+            <div class="value-card">
+                <h3>Valores</h3>
+                <p>Inovação, Acessibilidade, Colaboração e Dedicação.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="differentiators">
+        <h2>Nossos Diferenciais</h2>
+        <p>O LogicLab se destaca ao focar no aprendizado inicial de lógica com uma abordagem única:</p>
+        <div class="diff-grid">
+            <div class="diff-card">
+                <h3>Exercícios Práticos</h3>
+                <p>Atividades interativas para reforçar conceitos de lógica.</p>
+            </div>
+            <div class="diff-card">
+                <h3>Guia Visual</h3>
+                <p>Explicações claras e visuais para facilitar o entendimento.</p>
+            </div>
+            <div class="diff-card">
+                <h3>Feedback Imediato</h3>
+                <p>Avaliações em tempo real para acompanhar o progresso.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <h2>Nossa Equipe</h2>
+        <p>Conheça os talentos por trás do LogicLab:</p>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="thigas.jpeg" alt="Thiago">
+                <h3>Thiago</h3>
+                <p>Scrum Master, PO e Back-end</p>
+            </div>
+            <div class="team-card">
+                <img src="bigleandro.jpeg" alt="Leandro">
+                <h3>Leandro</h3>
+                <p>Front-end com Kotlin</p>
+            </div>
+            <div class="team-card">
+                <img src="ghabriell.jpeg" alt="Ghabriell">
+                <h3>Ghabriell</h3>
+                <p>Design com Figma</p>
+            </div>
+            <div class="team-card">
+                <img src="dida.jpeg" alt="Henrique">
+                <h3>Henrique</h3>
+                <p>Microserviços com Python</p>
+            </div>
+            <div class="team-card">
+                <img src="ian.png" alt="Ian">
+                <h3>Ian</h3>
+                <p>QA, Testes com Postman</p>
+            </div>
+            <div class="team-card">
+                <img src="bigkaua.jpeg" alt="Kauã">
+                <h3>Kauã</h3>
+                <p>Documentação de Repositório Back-end</p>
+            </div>
+            <div class="team-card">
+                <img src="#" alt="Nickolas">
+                <h3>Nickolas</h3>
+                <p>Documentação de API com Swagger</p>
+            </div>
+            <div class="team-card">
+                <img src="#" alt="Isabele">
+                <h3>Isabele</h3>
+                <p>Documentação de Repositório Front-end</p>
+            </div>
+            <div class="team-card">
+                <img src="#" alt="Germano">
+                <h3>Germano</h3>
+                <p>Documentações Exigidas pela Faculdade</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 LogicLab. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Stagger for cards
+                    const cards = entry.target.querySelectorAll('.value-card, .diff-card, .team-card');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                        }, index * 150);
+                    });
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
